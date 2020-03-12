@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+from item import Item
 
 # Declare all the rooms
 
@@ -22,6 +23,14 @@ chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
 }
 
+items = {
+    'banana': Item('Banana', 'The banana give you life points.'),
+    'iphone': Item('Iphone', 'The iphone can be used to call a friend.'),
+    'coffee': Item('Cup of coffee', 'The coffee can be used to gain energy'),
+    'sun glasses': Item('Sun glasses', 'The sun glasses can be used to block out the sun'),
+    'laptop': Item('Laptop', 'The laptop can be used for hacking')
+}
+
 
 # Link rooms together
 
@@ -42,10 +51,17 @@ room['treasure'].s_to = room['narrow']
 # Make a new player object that is currently in the 'outside' room.
 player = Player(input("What is your name?"), room['outside'])
 print(player.current_room)
+
+# allowed directions
+directions = ["n", "s", "e", "w"]
+
+
+def contains_multiple_words(word):
+    return len(word.split()) > 1
+
+
 # Write a loop that:
 #
-while True:
-
     # * Prints the current room name
     # * Prints the current description (the textwrap module might be useful here).
     # * Waits for user input and decides what to do.
@@ -54,3 +70,21 @@ while True:
     # Print an error message if the movement isn't allowed.
     #
     # If the user enters "q", quit the game.
+while True:
+    # read
+    user = input(
+        f"type: 'n' = north, 's' = south, 'e' = east , 'w' = west or 'q' to exit. \n {player.name} where would you like to go? ")
+    # check if one or two words
+    if contains_multiple_words(user) == True:
+        # see if item is in room
+        print('it works!')
+    # make sure user inputs n, s, e, w or q
+    elif user in directions:
+        # player travels in inputed direction
+        player.traveling(user)
+    elif user == 'q':
+        # quit game
+        print('Thank you for playing, see you next time!')
+        exit()
+    else:
+        print('command NOT allowed, please try again')
