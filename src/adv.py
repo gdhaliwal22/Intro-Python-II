@@ -43,6 +43,12 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
+# link rooms to items
+room['outside'].items.append(f"{items['banana']}")
+room['foyer'].items.append(f"{items['iphone']}")
+room['overlook'].items.append(f"{items['coffee']}")
+room['narrow'].items.append(f"{items['sun glasses']}")
+room['treasure'].items.append(f"{items['laptop']}")
 
 #
 # Main
